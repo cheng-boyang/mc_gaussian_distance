@@ -1,0 +1,5 @@
+stage,rng_normals,multiplies,adds,sqrts,relus,reads,writes
+RNG,3000,0,0,0,0,0,3000
+NN surrogate,0,5638000,5638000,3000,128000,169763,152000
+Euclidean distance,0,3000,2000,1000,0,3000,1000
+Total,3000,5641000,5640000,4000,128000,172763,156000

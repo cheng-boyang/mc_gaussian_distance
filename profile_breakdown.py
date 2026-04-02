@@ -36,8 +36,9 @@ from gaussian_distance_gpu import (
 
 SAMPLE_SIZES = [10_000, 100_000, 1_000_000]
 BATCH_SIZES = [10_000, 50_000, 250_000, 1_000_000]
-OPERATION_BREAKDOWN_CSV = "operation_breakdown.csv"
-GPU_SWEEP_CSV = "gpu_operation_sweep.csv"
+RESULTS_DIR = "results_csv"
+OPERATION_BREAKDOWN_CSV = f"{RESULTS_DIR}/operation_breakdown.csv"
+GPU_SWEEP_CSV = f"{RESULTS_DIR}/gpu_operation_sweep.csv"
 
 
 def _fmt_ms(seconds: float) -> str:

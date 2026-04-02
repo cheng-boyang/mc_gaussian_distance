@@ -41,7 +41,7 @@ GPU_A5000 = HardwareSpec(
     power_w=230.0,
     area_mm2=628.0,
 )
-HARDWARE_ESTIMATE_CSV = "hardware_estimate.csv"
+HARDWARE_ESTIMATE_CSV = "results_csv/hardware_estimate.csv"
 
 
 def bytes_per_sample(reads: int, writes: int, scalar_bytes: int) -> int:
