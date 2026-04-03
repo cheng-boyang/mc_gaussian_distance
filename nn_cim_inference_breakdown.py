@@ -18,6 +18,8 @@ Assumptions for the CIM surrogate:
 - One ADC conversion is counted per active output column per CIM tile use.
 - NN weights are loaded once per Monte Carlo run, not once per sample.
 - Feature construction and Euclidean norm are still conventional digital logic.
+- The NN surrogate uses streaming/on-chip buffering, so intermediate feature and
+  hidden activation tensors are not written back to memory.
 """
 
 from __future__ import annotations
@@ -135,7 +137,15 @@ def cim_surrogate_stage_counts(
     array_rows: int,
     array_cols: int,
 ) -> StageCounts:
-    """Return counts for feature construction plus CIM-executed NN surrogate."""
+    """Return counts for feature construction plus CIM-executed NN surrogate.
+
+    Memory model:
+    - NN weights are read once per Monte Carlo run.
+    - Raw inputs are read once per sample.
+    - Intermediate features and hidden activations stay on-chip and are not
+      counted as memory writes/reads.
+    - Only the final 3D NN output is written for the next stage.
+    """
     feature_multiplies = 6
     feature_adds = 6
     feature_sqrts = 3
@@ -160,8 +170,8 @@ def cim_surrogate_stage_counts(
         + (hidden1 * hidden2) + hidden2
         + (hidden2 * OUTPUT_DIM) + OUTPUT_DIM
     )
-    per_sample_reads = feature_reads + INPUT_DIM + hidden1 + hidden2
-    per_sample_writes = feature_writes + hidden1 + hidden2 + OUTPUT_DIM
+    per_sample_reads = feature_reads
+    per_sample_writes = OUTPUT_DIM
 
     return StageCounts(
         stage="NN surrogate (CIM)",
