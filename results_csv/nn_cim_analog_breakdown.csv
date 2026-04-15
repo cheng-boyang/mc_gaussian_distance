@@ -1,0 +1,6 @@
+stage,rng_normals,multiplies,adds,sqrts,relus,cim_mac_ops,cim_array_uses,adc_ops,tile_accum_adds,reads,writes,throughput_samples_per_sec,bottleneck,rng_energy_per_sample_pJ
+RNG (analog),3000000,0,0,0,0,0,0,0,0,0,0,,,
+NN surrogate (CIM),0,6000000,137000000,3000000,128000000,5632000000,3000000,131000000,0,15005763,3000000,,,
+Euclidean distance,0,3000000,2000000,1000000,0,0,0,0,0,3000000,1000000,,,
+Total,3000000,9000000,139000000,4000000,128000000,5632000000,3000000,131000000,0,18005763,4000000,,,
+Summary,,,,,,,,,,,,7633587.786259542,ADC,1.0799999999999998
