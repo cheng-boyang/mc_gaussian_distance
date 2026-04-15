@@ -1,8 +1,19 @@
 # Flies in the Room
 
-Voxel-based Gaussian distance estimation using a neural-network surrogate sampler,
-benchmarked against deterministic Gauss-Hermite quadrature with an analytical
-Compute-in-Memory (CIM) throughput model.
+Imagine two flies navigating an empty room. Each fly has an uncertain position —
+modelled as a 3-D Gaussian distribution — and needs to continuously estimate its
+distance to the other to avoid a collision. The room is discretized into a dense
+voxel grid, where each voxel stores the Gaussian parameters of a fly's possible
+location. At every moment, the flies must compute `E[||X - Y||_2]` in real time,
+fast enough to react before a collision occurs.
+
+This scenario motivates the core engineering challenge of the project: how cheaply
+and how quickly can we estimate the expected distance between two uncertain 3-D
+positions, at the scale of millions of voxel pairs per second?
+
+The project answers this with a neural-network surrogate sampler deployed on an
+analog-input Compute-in-Memory (CIM) array, benchmarked against deterministic
+Gauss-Hermite quadrature as the ground truth.
 
 ---
 
